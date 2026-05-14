@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>DigitalWeb Solutions - Acceso Profesional</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/login.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <div class="logo-text">DigitalWeb <span>Solutions</span></div>
+            </a>
+            <div class="nav-links">
+                <a href="#"><i class="fas fa-home"></i> Inicio</a>
+                <a href="#"><i class="fas fa-cogs"></i> Servicios</a>
+                <a href="#"><i class="fas fa-envelope"></i> Contacto</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="login-container">
+            <div class="login-card">
+                <div class="login-header">
+                    <h1>Bienvenido a <span>DigitalWeb</span></h1>
+                    <p>Accede a tu panel de control profesional</p>
+                </div>
+
+                <!-- Toggle Buttons -->
+                <div class="toggle-buttons">
+                    <button class="toggle-btn active" id="btnLogin">
+                        <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+                    </button>
+                    <button class="toggle-btn" id="btnRegister">
+                        <i class="fas fa-user-plus"></i> Registrarse
+                    </button>
+                </div>
+
+                <!-- Login Form -->
+                <div id="loginForm">
+                    <form id="formLogin">
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-envelope"></i> Email
+                            </label>
+                            <input type="email" id="loginEmail" class="form-control" placeholder="tu@empresa.com"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-lock"></i> Contraseña
+                            </label>
+                            <input type="password" id="loginPassword" class="form-control" placeholder="••••••••"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-user-tag"></i> Tipo de Usuario
+                            </label>
+                            <select id="loginTipo" class="form-select">
+                                <option value="cliente">📱 Cliente</option>
+                                <option value="admin">⚙️ Administrador</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-gold">
+                            <i class="fas fa-arrow-right"></i> Iniciar Sesión
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Register Form (hidden) -->
+                <div id="registerForm" style="display: none;">
+                    <form id="formRegister">
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-user"></i> Nombre Completo
+                            </label>
+                            <input type="text" id="regNombre" class="form-control" placeholder="Juan Pérez" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-envelope"></i> Email
+                            </label>
+                            <input type="email" id="regEmail" class="form-control" placeholder="tu@empresa.com"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-phone"></i> Teléfono
+                            </label>
+                            <input type="tel" id="regTelefono" class="form-control" placeholder="+34 600 000 000">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-lock"></i> Contraseña
+                            </label>
+                            <input type="password" id="regPassword" class="form-control"
+                                placeholder="Mínimo 6 caracteres" required>
+                        </div>
+                        <button type="submit" class="btn btn-outline">
+                            <i class="fas fa-user-plus"></i> Crear Cuenta
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-copyright">
+                <i class="fas fa-copyright"></i> 2024 DigitalWeb Solutions - Todos los derechos reservados
+            </div>
+            <div class="footer-links">
+                <a href="#"><i class="fas fa-shield-alt"></i> Privacidad</a>
+                <a href="#"><i class="fas fa-file-contract"></i> Términos</a>
+                <a href="#"><i class="fas fa-question-circle"></i> Ayuda</a>
+            </div>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/auth.js"></script>
+
+    <script>
+        // Toggle entre login y registro
+        const btnLogin = document.getElementById('btnLogin');
+        const btnRegister = document.getElementById('btnRegister');
+        const loginFormDiv = document.getElementById('loginForm');
+        const registerFormDiv = document.getElementById('registerForm');
+
+        btnLogin.addEventListener('click', () => {
+            btnLogin.classList.add('active');
+            btnRegister.classList.remove('active');
+            loginFormDiv.style.display = 'block';
+            registerFormDiv.style.display = 'none';
+        });
+
+        btnRegister.addEventListener('click', () => {
+            btnRegister.classList.add('active');
+            btnLogin.classList.remove('active');
+            loginFormDiv.style.display = 'none';
+            registerFormDiv.style.display = 'block';
+        });
+
+        // Login handler
+        document.getElementById('formLogin').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            const tipo = document.getElementById('loginTipo').value;
+
+            if (!email || !password) {
+                showAlert('Campos requeridos', 'Por favor completa todos los campos', 'warning');
+                return;
+            }
+
+            await login(email, password, tipo);
+        });
+
+        // Register handler
+        document.getElementById('formRegister').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const nombre = document.getElementById('regNombre').value;
+            const email = document.getElementById('regEmail').value;
+            const password = document.getElementById('regPassword').value;
+            const telefono = document.getElementById('regTelefono').value;
+
+            if (!nombre || !email || !password) {
+                showAlert('Campos requeridos', 'Por favor completa todos los campos', 'warning');
+                return;
+            }
+
+            if (password.length < 6) {
+                showAlert('Contraseña débil', 'La contraseña debe tener al menos 6 caracteres', 'warning');
+                return;
+            }
+
+            await register(nombre, email, password, telefono);
+        });
+    </script>
+</body>
+
+</html>

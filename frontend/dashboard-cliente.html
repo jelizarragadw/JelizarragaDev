@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Panel Cliente | DigitalWeb Solutions</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <div class="logo-text">DigitalWeb <span>Solutions</span></div>
+            </a>
+            <div class="user-info">
+                <div class="user-avatar">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="user-details">
+                    <span class="user-name" id="userName">Cliente</span>
+                    <span class="user-role">Cliente</span>
+                </div>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sidebar + Main Content -->
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-section="dashboard">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="nav-item" data-section="proyectos">
+                    <i class="fas fa-project-diagram"></i>
+                    <span>Mis Proyectos</span>
+                </a>
+                <a href="#" class="nav-item" data-section="pagos">
+                    <i class="fas fa-credit-card"></i>
+                    <span>Pagos</span>
+                </a>
+                <a href="#" class="nav-item" data-section="suscripciones">
+                    <i class="fas fa-sync-alt"></i>
+                    <span>Suscripciones</span>
+                </a>
+                <a href="#" class="nav-item" data-section="soporte">
+                    <i class="fas fa-headset"></i>
+                    <span>Soporte</span>
+                </a>
+                <a href="#" class="nav-item" data-section="perfil">
+                    <i class="fas fa-user-circle"></i>
+                    <span>Mi Perfil</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Section -->
+            <div id="dashboardSection" class="section active">
+                <div class="section-header">
+                    <h1><i class="fas fa-tachometer-alt"></i> Dashboard</h1>
+                    <p>Bienvenido de vuelta, <span id="welcomeName">Cliente</span></p>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="stats-grid" id="statsContainer">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-value" id="proyectosActivos">0</div>
+                        <div class="stat-label">Proyectos Activos</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-value" id="proyectosCompletados">0</div>
+                        <div class="stat-label">Proyectos Completados</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-euro-sign"></i>
+                        </div>
+                        <div class="stat-value" id="totalPagado">€0</div>
+                        <div class="stat-label">Total Pagado</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-value" id="deudaPendiente">€0</div>
+                        <div class="stat-label">Pendiente de Pago</div>
+                    </div>
+                </div>
+
+                <div class="two-columns">
+                    <!-- Próximos Pagos -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-calendar-alt"></i> Próximos Pagos</h3>
+                        </div>
+                        <div class="card-body" id="proximosPagosContainer">
+                            <div class="loading-spinner">Cargando...</div>
+                        </div>
+                    </div>
+
+                    <!-- Notificaciones -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-bell"></i> Notificaciones</h3>
+                        </div>
+                        <div class="card-body" id="notificacionesContainer">
+                            <div class="loading-spinner">Cargando...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Proyectos Section -->
+            <div id="proyectosSection" class="section">
+                <div class="section-header">
+                    <h1><i class="fas fa-project-diagram"></i> Mis Proyectos</h1>
+                    <p>Gestión de tus proyectos activos y finalizados</p>
+                </div>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Proyecto</th>
+                                <th>Estado</th>
+                                <th>Costo</th>
+                                <th>Pagado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="proyectosContainer">
+                            <tr>
+                                <td colspan="5" class="text-center">Cargando...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Pagos Section -->
+            <div id="pagosSection" class="section">
+                <div class="section-header">
+                    <h1><i class="fas fa-credit-card"></i> Historial de Pagos</h1>
+                    <p>Registro de todos tus pagos realizados</p>
+                </div>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Proyecto</th>
+                                <th>Monto</th>
+                                <th>Método</th>
+                                <th>Fecha</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody id="pagosContainer">
+                            <tr>
+                                <td colspan="5" class="text-center">Cargando...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Suscripciones Section -->
+            <div id="suscripcionesSection" class="section">
+                <div class="section-header">
+                    <h1><i class="fas fa-sync-alt"></i> Suscripciones</h1>
+                    <p>Hosting, dominios y servicios activos</p>
+                </div>
+                <div class="cards-grid" id="suscripcionesContainer">
+                    <div class="loading-spinner">Cargando...</div>
+                </div>
+            </div>
+
+            <!-- Soporte Section -->
+            <div id="soporteSection" class="section">
+                <div class="section-header">
+                    <h1><i class="fas fa-headset"></i> Tickets de Soporte</h1>
+                    <p>Atención personalizada para tus consultas</p>
+                </div>
+                <button class="btn-gold" onclick="nuevoTicket()">
+                    <i class="fas fa-plus"></i> Nuevo Ticket
+                </button>
+                <div class="table-responsive mt-3">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Asunto</th>
+                                <th>Estado</th>
+                                <th>Prioridad</th>
+                                <th>Fecha</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ticketsContainer">
+                            <tr>
+                                <td colspan="6" class="text-center">Cargando...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Perfil Section -->
+            <div id="perfilSection" class="section">
+                <div class="section-header">
+                    <h1><i class="fas fa-user-circle"></i> Mi Perfil</h1>
+                    <p>Tus datos personales y configuración</p>
+                </div>
+                <div class="two-columns">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-info-circle"></i> Información Personal</h3>
+                        </div>
+                        <div class="card-body" id="perfilContainer">
+                            <div class="loading-spinner">Cargando...</div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-lock"></i> Seguridad</h3>
+                        </div>
+                        <div class="card-body">
+                            <form id="cambiarPasswordForm">
+                                <div class="form-group">
+                                    <label class="form-label">Contraseña Actual</label>
+                                    <input type="password" id="passwordActual" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Nueva Contraseña</label>
+                                    <input type="password" id="passwordNueva" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Confirmar Contraseña</label>
+                                    <input type="password" id="passwordConfirm" class="form-control" required>
+                                </div>
+                                <button type="submit" class="btn-gold w-100">
+                                    <i class="fas fa-save"></i> Actualizar Contraseña
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/cliente.js"></script>
+
+    <script>
+        // Verificar autenticación
+        if (!checkAuth()) {
+            window.location.href = '/login.html';
+        }
+
+        // Mostrar nombre del usuario
+        const user = getUser();
+        if (user) {
+            document.getElementById('userName').textContent = user.nombre;
+            document.getElementById('welcomeName').textContent = user.nombre;
+        }
+
+        // Navegación por sidebar
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                const section = item.dataset.section;
+
+                // Actualizar active en sidebar
+                document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+                item.classList.add('active');
+
+                // Mostrar sección correspondiente
+                document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+                document.getElementById(`${section}Section`).classList.add('active');
+
+                // Cargar datos según sección
+                if (section === 'dashboard') cargarDashboard();
+                if (section === 'proyectos') cargarProyectos();
+                if (section === 'pagos') cargarPagos();
+                if (section === 'suscripciones') cargarSuscripciones();
+                if (section === 'soporte') cargarTickets();
+                if (section === 'perfil') cargarPerfil();
+            });
+        });
+
+        // Cambiar contraseña
+        document.getElementById('cambiarPasswordForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const actual = document.getElementById('passwordActual').value;
+            const nueva = document.getElementById('passwordNueva').value;
+            const confirm = document.getElementById('passwordConfirm').value;
+
+            if (nueva !== confirm) {
+                showAlert('Error', 'Las contraseñas nuevas no coinciden', 'error');
+                return;
+            }
+
+            await cambiarPassword(actual, nueva);
+        });
+
+        // Cargar dashboard al inicio
+        cargarDashboard();
+    </script>
+</body>
+
+</html>

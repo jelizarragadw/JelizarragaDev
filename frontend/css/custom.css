@@ -1,0 +1,353 @@
+/* frontend/css/custom.css */
+:root {
+    --white: #FFFFFF;
+    --black: #1A1A1A;
+    --gold: #D4AF37;
+    --gold-light: #E8D17A;
+    --gold-dark: #B8960F;
+    --gray-bg: #F8F9FA;
+}
+
+/* Estilos generales */
+body {
+    font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background-color: var(--white);
+    color: var(--black);
+}
+
+/* Navbar personalizado */
+.navbar-custom {
+    background: var(--white);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+    border-bottom: 2px solid var(--gold);
+    padding: 1rem 0;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--black) !important;
+}
+
+.navbar-brand span {
+    color: var(--gold);
+}
+
+.nav-link {
+    font-weight: 500;
+    color: var(--black) !important;
+    transition: all 0.3s ease;
+    margin: 0 0.5rem;
+}
+
+.nav-link:hover {
+    color: var(--gold) !important;
+    transform: translateY(-2px);
+}
+
+.nav-link.active {
+    color: var(--gold) !important;
+    border-bottom: 2px solid var(--gold);
+}
+
+/* Botones */
+.btn-gold {
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+    color: var(--black);
+    border: none;
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.btn-gold:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+    color: var(--black);
+}
+
+.btn-outline-gold {
+    border: 2px solid var(--gold);
+    background: transparent;
+    color: var(--black);
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-gold:hover {
+    background: var(--gold);
+    color: var(--black);
+    transform: translateY(-2px);
+}
+
+.btn-black {
+    background: var(--black);
+    color: var(--white);
+    border: none;
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.btn-black:hover {
+    background: var(--gold);
+    color: var(--black);
+    transform: translateY(-2px);
+}
+
+/* Cards */
+.card-premium {
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.card-premium:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 50px rgba(212, 175, 55, 0.15);
+}
+
+.card-premium .card-header {
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+    color: var(--black);
+    border: none;
+    padding: 1.25rem;
+    font-weight: 600;
+}
+
+/* Stats Cards */
+.stat-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 1.5rem;
+    text-align: center;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-3px);
+}
+
+.stat-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+}
+
+.stat-icon i {
+    font-size: 1.8rem;
+    color: var(--black);
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    color: #6c757d;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* Tablas */
+.table-custom {
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.table-custom thead th {
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+    color: var(--black);
+    font-weight: 600;
+    border: none;
+    padding: 1rem;
+}
+
+.table-custom tbody tr {
+    transition: all 0.3s ease;
+}
+
+.table-custom tbody tr:hover {
+    background: rgba(212, 175, 55, 0.05);
+}
+
+/* Badges */
+.badge-status {
+    padding: 0.4rem 1rem;
+    border-radius: 50px;
+    font-weight: 500;
+    font-size: 0.75rem;
+}
+
+.badge-pagado {
+    background: #d4edda;
+    color: #155724;
+}
+
+.badge-pendiente {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.badge-vencido {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.badge-progreso {
+    background: #d1ecf1;
+    color: #0c5460;
+}
+
+/* Login Section */
+.login-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, var(--white) 0%, #f5f5f5 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.login-card {
+    background: var(--white);
+    border-radius: 30px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+    padding: 2.5rem;
+    position: relative;
+    z-index: 2;
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.login-header h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--black);
+}
+
+.login-header h2 span {
+    color: var(--gold);
+}
+
+.login-header p {
+    color: #6c757d;
+}
+
+/* Formularios */
+.form-floating {
+    margin-bottom: 1rem;
+}
+
+.form-floating input,
+.form-floating select,
+.form-floating textarea {
+    border: 2px solid #e9ecef;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.form-floating input:focus,
+.form-floating select:focus,
+.form-floating textarea:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 0.2rem rgba(212, 175, 55, 0.25);
+}
+
+/* Sidebar */
+.sidebar {
+    background: var(--white);
+    min-height: 100vh;
+    box-shadow: 2px 0 20px rgba(0, 0, 0, 0.05);
+    border-right: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.sidebar .nav-link {
+    padding: 0.8rem 1.5rem;
+    margin: 0.3rem 0;
+    border-radius: 12px;
+    color: var(--black);
+}
+
+.sidebar .nav-link:hover,
+.sidebar .nav-link.active {
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+    color: var(--black);
+}
+
+.sidebar .nav-link i {
+    margin-right: 0.75rem;
+    width: 24px;
+}
+
+/* Footer */
+.footer {
+    background: var(--black);
+    color: var(--white);
+    padding: 3rem 0 1rem;
+    margin-top: 4rem;
+}
+
+.footer a {
+    color: var(--gold);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.footer a:hover {
+    color: var(--gold-light);
+    text-decoration: underline;
+}
+
+/* Animaciones */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fadeInUp {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .sidebar {
+        min-height: auto;
+        margin-bottom: 2rem;
+    }
+
+    .stat-card {
+        margin-bottom: 1rem;
+    }
+
+    .login-card {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+}
